@@ -1,7 +1,5 @@
 http://amadeus-z.github.io/categories/index.html
 http://amadeus-z.github.io/tags/index.html
-http://amadeus-z.github.io/2022/11/02/categories/
-http://amadeus-z.github.io/2022/11/02/tags/
 http://amadeus-z.github.io/2022/11/02/Anything/
 http://amadeus-z.github.io/2022/11/02/hello-world/
 http://amadeus-z.github.io/
