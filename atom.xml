@@ -6,7 +6,7 @@
   <link href="http://amadeus-z.github.io/atom.xml" rel="self"/>
   
   <link href="http://amadeus-z.github.io/"/>
-  <updated>2022-11-02T08:08:13.641Z</updated>
+  <updated>2022-12-13T11:55:28.677Z</updated>
   <id>http://amadeus-z.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Chapter_0</title>
+    <link href="http://amadeus-z.github.io/2022/12/13/Chapter-0/"/>
+    <id>http://amadeus-z.github.io/2022/12/13/Chapter-0/</id>
+    <published>2022-12-13T11:54:28.000Z</published>
+    <updated>2022-12-13T11:55:28.677Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Nested-multiplication-x2F-Horner’s-method"><a href="#Nested-multiplication-x2F-Horner’s-method" class="headerlink" title="Nested multiplication &#x2F; Horner’s method"></a>Nested multiplication &#x2F; Horner’s method</h3><p><strong>Example:</strong><br>$\begin{align}  P(x) &amp;&#x3D;2x^{4}+3x^{3}-3x^{2}+5x-1\ &amp;&#x3D;-1+x(5+x(-3+x(3+x\cdot 2))) \end{align}$</p><p><strong>Code:</strong></p><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% d: degree of polynomial</span></span><br><span class="line"><span class="comment">% c: coefficients array</span></span><br><span class="line"><span class="comment">% b: array of base points b</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">y</span>=<span class="title">nest</span><span class="params">(d,c,x,b)</span></span></span><br><span class="line"><span class="keyword">if</span> nargin&lt;<span class="number">4</span></span><br><span class="line">b=<span class="built_in">zeros</span>(d,<span class="number">1</span>); </span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">y = c(d+<span class="number">1</span>);</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=d:<span class="number">-1</span>:<span class="number">1</span></span><br><span class="line">y = =y.*(x-b(<span class="built_in">i</span>))+c(<span class="built_in">i</span>);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure><h3 id="Decimal-to-Binary"><a href="#Decimal-to-Binary" class="headerlink" title="Decimal to Binary"></a>Decimal to Binary</h3><p><strong>Example</strong>: $(0.7)<em>{10}\rightarrow (.1\overline{0110})</em>{2}$</p><p>$\begin{align} .7\times 2&#x3D;.4+1 \ .4\times2&#x3D;.8+0 \ .8\times 2&#x3D;.6+1 \ .6\times 2&#x3D;.2+1 \ .2\times 2&#x3D;.4+0 \ .4\times 2&#x3D;.8+0 \end{align}$</p><h3 id="Binary-to-Decimal"><a href="#Binary-to-Decimal" class="headerlink" title="Binary to Decimal"></a>Binary to Decimal</h3><p><strong>Example 1</strong>: $(.1011)<em>{2}\rightarrow (\frac{11}{16})</em>{10}$ </p><p>$(.1011)<em>{2}&#x3D;1\cdot \frac{1}{2}^{1}+0\cdot \frac{1}{2}^{2}+1\cdot \frac{1}{2}^{3}+1\cdot \frac{1}{2}^{4}&#x3D;(\frac{11}{16})</em>{10}$  </p><p><strong>Example 2</strong>: $(.\overline{1011})_{2}$</p><p>Let $x&#x3D;(.\overline{1011})<em>{2}\Rightarrow 2^{4}x&#x3D;(1011.\overline{1011})</em>{2}\Rightarrow (2^{4}-1)x&#x3D;(1011)<em>{2}&#x3D;(11)</em>{10}$</p><h3 id="Floating-Point-Representation-of-Real-Numbers"><a href="#Floating-Point-Representation-of-Real-Numbers" class="headerlink" title="Floating Point Representation of Real Numbers"></a>Floating Point Representation of Real Numbers</h3><table><thead><tr><th>Precision</th><th>sign</th><th>exponent</th><th>mantissa</th></tr></thead><tbody><tr><td>single</td><td>1</td><td>8</td><td>23</td></tr><tr><td>double</td><td>1</td><td>11</td><td>52</td></tr><tr><td>long double</td><td>1</td><td>15</td><td>64</td></tr></tbody></table><h3 id="The-Intermediate-Value-Theorem"><a href="#The-Intermediate-Value-Theorem" class="headerlink" title="The Intermediate Value Theorem"></a>The Intermediate Value Theorem</h3><p><a href="https://en.wikipedia.org/wiki/Intermediate_value_theorem">wiki</a></p><h3 id="The-Mean-Value-Theorem"><a href="#The-Mean-Value-Theorem" class="headerlink" title="The Mean Value Theorem"></a>The Mean Value Theorem</h3><p><a href="https://en.wikipedia.org/wiki/Mean_value_theorem">wiki</a></p><h3 id="Taylor’s-Theorem"><a href="#Taylor’s-Theorem" class="headerlink" title="Taylor’s Theorem"></a>Taylor’s Theorem</h3><p><a href="https://en.wikipedia.org/wiki/Taylor%27s_theorem">wiki</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;Nested-multiplication-x2F-Horner’s-method&quot;&gt;&lt;a href=&quot;#Nested-multiplication-x2F-Horner’s-method&quot; class=&quot;headerlink&quot; title=&quot;Nested mul</summary>
+      
+    
+    
+    
+    
+    <category term="Numerical" scheme="http://amadeus-z.github.io/tags/Numerical/"/>
+    
+  </entry>
   
   <entry>
     <title>Anything</title>
