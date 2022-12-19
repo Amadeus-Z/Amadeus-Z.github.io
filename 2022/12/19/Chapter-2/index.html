@@ -1,0 +1,257 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Chapter_2 | </title><meta name="author" content="Amadeus"><meta name="copyright" content="Amadeus"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Chapter_2_Equations SystemsDirect MethodGaussian eliminationAfter the elimination is completed, the tableau is upper triangular: \begin{pmatrix} a_{11} &amp; a_{12} &amp; ... &amp; a_{1n} &amp; | &amp; b_{1} \\ 0 &amp; a_{22">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chapter_2">
+<meta property="og:url" content="http://amadeus-z.github.io/2022/12/19/Chapter-2/index.html">
+<meta property="og:site_name">
+<meta property="og:description" content="Chapter_2_Equations SystemsDirect MethodGaussian eliminationAfter the elimination is completed, the tableau is upper triangular: \begin{pmatrix} a_{11} &amp; a_{12} &amp; ... &amp; a_{1n} &amp; | &amp; b_{1} \\ 0 &amp; a_{22">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://amadeus-z.github.io/img/top.webp">
+<meta property="article:published_time" content="2022-12-19T13:07:36.000Z">
+<meta property="article:modified_time" content="2022-12-19T13:08:43.560Z">
+<meta property="article:author" content="Amadeus">
+<meta property="article:tag" content="Numerical">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://amadeus-z.github.io/img/top.webp"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://amadeus-z.github.io/2022/12/19/Chapter-2/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: ture,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Chapter_2',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-12-19 21:08:43'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/Users/amadeus/Documents/blog/themes/butterfly/source/css/mycss.css"><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (false) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/top.webp')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/"></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Chapter_2</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-12-19T13:07:36.000Z" title="发表于 2022-12-19 21:07:36">2022-12-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-12-19T13:08:43.560Z" title="更新于 2022-12-19 21:08:43">2022-12-19</time></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Chapter-2-Equations-Systems"><a href="#Chapter-2-Equations-Systems" class="headerlink" title="Chapter_2_Equations Systems"></a>Chapter_2_Equations Systems</h1><h2 id="Direct-Method"><a href="#Direct-Method" class="headerlink" title="Direct Method"></a>Direct Method</h2><h3 id="Gaussian-elimination"><a href="#Gaussian-elimination" class="headerlink" title="Gaussian elimination"></a>Gaussian elimination</h3><p>After the elimination is completed, the tableau is upper triangular:</p>
+<script type="math/tex; mode=display">\begin{pmatrix} a_{11} & a_{12} & ... & a_{1n} & | & b_{1} \\ 0 & a_{22} & ... & a_{2n} & | & b_{2} \\ \vdots & \vdots & \ddots & \vdots & | & \vdots \\ 0 & 0 & ... & a_{nn} & | & b_{n} \end{pmatrix}</script><h3 id="LU-Factorization"><a href="#LU-Factorization" class="headerlink" title="LU Factorization"></a>LU Factorization</h3><h4 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h4><p>An $m\times n$ matrix $L$ is Lower-triangular if its entries satisfy $l_{ij}=0$ for $i<j$. An $m\times n$ matrix $U$ is Upper-triangular if its entries satisfy $u_{ij}=0$ for $i>j$ </p>
+<p>Let $L_{ij}(-c)$ denote the matrix:</p>
+<script type="math/tex; mode=display">\begin{pmatrix} 1 & 0&0 \\ -c & 1&0 \\ 0&0 &1 \\ \end{pmatrix}</script><p>Applay to $\forall$ matrix A:</p>
+<script type="math/tex; mode=display">\begin{pmatrix} 1 & 0&0 \\ -c & 1&0 \\ 0&0 &1 \\ \end{pmatrix}\begin{pmatrix} a_{11} & a_{12}&a_{13} \\ a_{21} & a_{22}&a_{23} \\ a_{31}&a_{32} &a_{33} \\ \end{pmatrix}=\begin{pmatrix} a_{11} & a_{12}&a_{13} \\ a_{21}-ca_{11} & a_{22}-ca_{12}&a_{23}-ca_{13} \\ a_{31}&a_{32} &a_{33} \end{pmatrix}</script><p>Since $L_{ij}(-c)^{-1}=L_{ij}(c)\Rightarrow L_{ij}(-c) A=U_{A}\Rightarrow A=L_{ij}(c)U_{A}$</p>
+<p>since $\begin{pmatrix} 1 &amp; 0&amp;0 \\ c_{1} &amp; 1&amp;0 \\ 0&amp;0 &amp;1 \\ \end{pmatrix}\begin{pmatrix} 1 &amp; 0&amp;0 \\ 0 &amp; 1&amp;0 \\ c_{2}&amp;0 &amp;1 \\ \end{pmatrix}\begin{pmatrix} 1 &amp; 0&amp;0 \\ 0 &amp; 1&amp;0 \\ 0&amp;c_{3} &amp;1 \\ \end{pmatrix}=\begin{pmatrix} 1 &amp; 0&amp;0 \\ c_{1} &amp; 1&amp;0 \\ c_{2}&amp;c_{3} &amp;1 \\ \end{pmatrix}$</p>
+<p>$\Rightarrow \forall A=LU$<br>$\Rightarrow Ax=B\Leftrightarrow L(Ux)=B$, First solve $Lu=b$ for $u$, then solve $Ux=u$ for $x$.</p>
+<h4 id="Error"><a href="#Error" class="headerlink" title="Error"></a>Error</h4><p>$to \ be \ continued$ </p>
+<h3 id="PA-LU-Factorization"><a href="#PA-LU-Factorization" class="headerlink" title="PA=LU Factorization"></a>PA=LU Factorization</h3><h4 id="Partial-pivoting-protocol"><a href="#Partial-pivoting-protocol" class="headerlink" title="Partial pivoting protocol"></a>Partial pivoting protocol</h4><p>Choose the biggest entry to eliminate the column<br>$\Leftrightarrow$ if $|a_{pj}|\ge |a_{ij}|$ for all $i$ , Exchange the $p$th row to the first row and eliminate the $j$th column.</p>
+<h4 id="Permutation-matrix"><a href="#Permutation-matrix" class="headerlink" title="Permutation matrix"></a>Permutation matrix</h4><p>A permutation matrix is an $n\times n$ matrix consisting of all zeros, except for a single 1 in every row and column. Such as $\begin{pmatrix} 1 &amp; 0&amp;0 \\ 0 &amp; 0&amp;1 \\ 0&amp;1 &amp;0 \\ \end{pmatrix}$.</p>
+<h4 id="PA-LU"><a href="#PA-LU" class="headerlink" title="PA=LU"></a>PA=LU</h4><p>Let permutation matrix $P$ with $A$ to establish a matrix after partial pivoting protocol.<br>$PAx=Pb\Rightarrow LUx=Pb\Rightarrow$ </p>
+<ol>
+<li>$Lc=Pb$ for $c$. </li>
+<li>$Ux=c$ for $x$.</li>
+</ol>
+<h4 id="Euler-Bernoulli-Beam"><a href="#Euler-Bernoulli-Beam" class="headerlink" title="Euler-Bernoulli Beam"></a>Euler-Bernoulli Beam</h4><p>$to \ be \ continued$</p>
+<h2 id="Iterative-Methods"><a href="#Iterative-Methods" class="headerlink" title="Iterative Methods"></a>Iterative Methods</h2><h3 id="Jacobi-Method"><a href="#Jacobi-Method" class="headerlink" title="Jacobi Method"></a>Jacobi Method</h3><h4 id="Definition-1"><a href="#Definition-1" class="headerlink" title="Definition"></a>Definition</h4><p>A form of FPI for a system of equations.<br>Let $D$ denote the main diagonal of $A$. Then $A=L+D+U\Rightarrow (L+D+U)x=b\Rightarrow x=D^{-1}(b-(L+U)x)$ .<br>$x_{0}=\text{initial vector}$<br>$x_{k+1}=D^{-1}(b-(L+U)x_{k})$</p>
+<h4 id="Strictly-diagonally-dominant"><a href="#Strictly-diagonally-dominant" class="headerlink" title="Strictly diagonally dominant"></a>Strictly diagonally dominant</h4><p>The $n\times n$ matrix $A=(a_{ij})$ is strictly diagonally dominant if $\forall 1\le i\le n,|a_{ii}|\ge \sum\limits_{j\ne i}|a_{ij}|$ </p>
+<h4 id="Convergence"><a href="#Convergence" class="headerlink" title="Convergence"></a>Convergence</h4><p>If the $n\times n$ matrix $A$ is strictly diagonally dominant, then</p>
+<ol>
+<li>$A$ is a nonsingular matrix</li>
+<li>The Jacobi Method applied to $Ax=b$ converges to the unique solution</li>
+</ol>
+<h3 id="Gauss-Seidel-Method"><a href="#Gauss-Seidel-Method" class="headerlink" title="Gauss-Seidel Method"></a>Gauss-Seidel Method</h3><p>Difference from Jacobi method: the most recently updated values of the unknowns are used at each step.</p>
+<h4 id="Definition-2"><a href="#Definition-2" class="headerlink" title="Definition"></a>Definition</h4><p>$x_{0}=\text{initial vector}$<br>$(L+D)x_{k+1}=-Ux_{k}+b$<br>$x_{k+1}=D^{-1}(b-Ux_{k}-Lx_{k+1})$</p>
+<h4 id="Convergence-1"><a href="#Convergence-1" class="headerlink" title="Convergence"></a>Convergence</h4><p>If the $n\times n$ matrix $A$ is strictly diagonally dominant, then</p>
+<ol>
+<li>$A$ is a nonsingular matrix</li>
+<li>The Gauss-Seidel applied to $Ax=b$ converges to a solution</li>
+</ol>
+<h4 id="Successive-Over-Relaxation-SOR"><a href="#Successive-Over-Relaxation-SOR" class="headerlink" title="Successive Over-Relaxation (SOR)"></a>Successive Over-Relaxation (SOR)</h4><p>A method to speed the convergence of Gauss-Seidel method.<br>$to \ be \ continued$</p>
+<h3 id="Convergence-2"><a href="#Convergence-2" class="headerlink" title="Convergence"></a>Convergence</h3><h4 id="sparse-matrix-computations"><a href="#sparse-matrix-computations" class="headerlink" title="sparse matrix computations"></a>sparse matrix computations</h4><p>$to \ be \ continued$</p>
+<h2 id="Methods-for-symmetric-positive-definite-matrices"><a href="#Methods-for-symmetric-positive-definite-matrices" class="headerlink" title="Methods for symmetric positive-definite matrices"></a>Methods for symmetric positive-definite matrices</h2><h3 id="Symmetric-positive-definite-matrices"><a href="#Symmetric-positive-definite-matrices" class="headerlink" title="Symmetric positive-definite matrices"></a>Symmetric positive-definite matrices</h3><h4 id="Definition-3"><a href="#Definition-3" class="headerlink" title="Definition"></a>Definition</h4><p>The $n\times n$ matrix $A$ is <strong>symmetric</strong> if $A^{T}=A$.<br>The matrix $A$ is <strong>positive-definite</strong> if $x^{T}Ax&gt;0$ for all vectors $x\ne 0$</p>
+<h4 id="Property"><a href="#Property" class="headerlink" title="Property"></a>Property</h4><ol>
+<li>If the $n\times n$ matrix $A$ is symmetric, then $A$ is positive-definite $\Leftrightarrow$ all of its <strong>eigenvalues</strong> are positive</li>
+<li>If $A$ is $n\times n$ symmetric positive-definite and $X$ is an $n\times m$ matrix of full rank with $n\ge m$, then $X^{T}AX$ is $m\times m$ symmetric positive-definite.</li>
+<li>Any <strong>principal submatrix</strong> of a symmetric positive-definite matrix is symmetric positive-definit</li>
+</ol>
+<h3 id="Cholesky-factorization"><a href="#Cholesky-factorization" class="headerlink" title="Cholesky factorization"></a>Cholesky factorization</h3><h4 id="Theorem"><a href="#Theorem" class="headerlink" title="Theorem"></a>Theorem</h4><p>If $A$ is a symmetric positive-definite $n\times n$ matrix, then there exists an upper triangular $n\times n$ matrix $R$ such that $A=R^{T}R$</p>
+<p><strong>Example</strong>:<br>$A=\begin{pmatrix}a  &amp; b \\ b &amp; c \end{pmatrix}=\begin{pmatrix} \sqrt{a}  &amp; 0 \\ \frac{b}{\sqrt{a}} &amp; \sqrt{c-\frac{b^{2}}{a}} \end{pmatrix}\begin{pmatrix} \sqrt{a}  &amp; \frac{b}{\sqrt{a}} \\ 0 &amp; \sqrt{c-\frac{b^{2}}{a}} \end{pmatrix}=R^{T}R$</p>
+<h3 id="Conjugate-Gradient-Method"><a href="#Conjugate-Gradient-Method" class="headerlink" title="Conjugate Gradient Method"></a>Conjugate Gradient Method</h3><p>$to \ be \ continued$</p>
+<h2 id="Nonlinear-Systems-of-Equations"><a href="#Nonlinear-Systems-of-Equations" class="headerlink" title="Nonlinear Systems of Equations"></a>Nonlinear Systems of Equations</h2><h3 id="Multivariate-Newton’s-Method"><a href="#Multivariate-Newton’s-Method" class="headerlink" title="Multivariate Newton’s Method"></a>Multivariate Newton’s Method</h3><h4 id="Definition-4"><a href="#Definition-4" class="headerlink" title="Definition"></a>Definition</h4><p>Denote a system of equation ($f_{i}(u,v,w)=0$) by $F(u,v,w)=(f_{i},…)$.<br>The Taylor expansion for vector-valued functions around $x_{0}$ is:<br>$F(x)=F(x_{0})+DF(x_{0})(x-x_{0})+O(x-x_{0})^{2}$<br>$\Rightarrow 0=F(r)\approx F(x_{0})+DF(x_{0})(r-x_{0})$<br>$\Rightarrow \ \ x_{0}=\text{initial vector}$<br>$\Rightarrow \ \ x_{k+1}=x_{k}-(DF(x_{k}))^{-1}F(x_{k})$</p>
+<h3 id="Broyden’s-Method"><a href="#Broyden’s-Method" class="headerlink" title="Broyden’s Method"></a>Broyden’s Method</h3><p>$to \ be \ continued$</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Numerical/">Numerical</a></div><div class="post_share"><div class="social-share" data-image="/img/top.webp" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/12/16/Chapter-1/"><img class="next-cover" src="/img/top.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Chapter_1</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/12/13/Chapter-0/" title="Chapter_0"><img class="cover" src="/img/top.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-13</div><div class="title">Chapter_0</div></div></a></div><div><a href="/2022/12/16/Chapter-1/" title="Chapter_1"><img class="cover" src="/img/top.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-16</div><div class="title">Chapter_1</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Amadeus</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Amadeus-Z"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:qiuyizhao4-c@my.cityu.edu.hk" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Chapter-2-Equations-Systems"><span class="toc-number">1.</span> <span class="toc-text">Chapter_2_Equations Systems</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Direct-Method"><span class="toc-number">1.1.</span> <span class="toc-text">Direct Method</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Gaussian-elimination"><span class="toc-number">1.1.1.</span> <span class="toc-text">Gaussian elimination</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LU-Factorization"><span class="toc-number">1.1.2.</span> <span class="toc-text">LU Factorization</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Definition"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">Definition</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Error"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">Error</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PA-LU-Factorization"><span class="toc-number">1.1.3.</span> <span class="toc-text">PA&#x3D;LU Factorization</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Partial-pivoting-protocol"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">Partial pivoting protocol</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Permutation-matrix"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">Permutation matrix</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PA-LU"><span class="toc-number">1.1.3.3.</span> <span class="toc-text">PA&#x3D;LU</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Euler-Bernoulli-Beam"><span class="toc-number">1.1.3.4.</span> <span class="toc-text">Euler-Bernoulli Beam</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Iterative-Methods"><span class="toc-number">1.2.</span> <span class="toc-text">Iterative Methods</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Jacobi-Method"><span class="toc-number">1.2.1.</span> <span class="toc-text">Jacobi Method</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Definition-1"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">Definition</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Strictly-diagonally-dominant"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">Strictly diagonally dominant</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Convergence"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">Convergence</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Gauss-Seidel-Method"><span class="toc-number">1.2.2.</span> <span class="toc-text">Gauss-Seidel Method</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Definition-2"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">Definition</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Convergence-1"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">Convergence</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Successive-Over-Relaxation-SOR"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">Successive Over-Relaxation (SOR)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Convergence-2"><span class="toc-number">1.2.3.</span> <span class="toc-text">Convergence</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#sparse-matrix-computations"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">sparse matrix computations</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Methods-for-symmetric-positive-definite-matrices"><span class="toc-number">1.3.</span> <span class="toc-text">Methods for symmetric positive-definite matrices</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Symmetric-positive-definite-matrices"><span class="toc-number">1.3.1.</span> <span class="toc-text">Symmetric positive-definite matrices</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Definition-3"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">Definition</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Property"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">Property</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cholesky-factorization"><span class="toc-number">1.3.2.</span> <span class="toc-text">Cholesky factorization</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Theorem"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">Theorem</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Conjugate-Gradient-Method"><span class="toc-number">1.3.3.</span> <span class="toc-text">Conjugate Gradient Method</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nonlinear-Systems-of-Equations"><span class="toc-number">1.4.</span> <span class="toc-text">Nonlinear Systems of Equations</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Multivariate-Newton%E2%80%99s-Method"><span class="toc-number">1.4.1.</span> <span class="toc-text">Multivariate Newton’s Method</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Definition-4"><span class="toc-number">1.4.1.1.</span> <span class="toc-text">Definition</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Broyden%E2%80%99s-Method"><span class="toc-number">1.4.2.</span> <span class="toc-text">Broyden’s Method</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/12/19/Chapter-2/" title="Chapter_2"><img src="/img/top.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Chapter_2"/></a><div class="content"><a class="title" href="/2022/12/19/Chapter-2/" title="Chapter_2">Chapter_2</a><time datetime="2022-12-19T13:07:36.000Z" title="发表于 2022-12-19 21:07:36">2022-12-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/16/Chapter-1/" title="Chapter_1"><img src="/img/top.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Chapter_1"/></a><div class="content"><a class="title" href="/2022/12/16/Chapter-1/" title="Chapter_1">Chapter_1</a><time datetime="2022-12-16T13:45:45.000Z" title="发表于 2022-12-16 21:45:45">2022-12-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/13/Chapter-0/" title="Chapter_0"><img src="/img/top.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Chapter_0"/></a><div class="content"><a class="title" href="/2022/12/13/Chapter-0/" title="Chapter_0">Chapter_0</a><time datetime="2022-12-13T11:54:28.000Z" title="发表于 2022-12-13 19:54:28">2022-12-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/11/02/Anything/" title="Anything"><img src="/img/top.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Anything"/></a><div class="content"><a class="title" href="/2022/11/02/Anything/" title="Anything">Anything</a><time datetime="2022-11-02T08:08:13.000Z" title="发表于 2022-11-02 16:08:13">2022-11-02</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/top.webp')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Amadeus</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container').forEach(node => {
+            if (node.hasAttribute('display')) {
+              btf.wrap(node, 'div', { class: 'mathjax-overflow' })
+            } else {
+              btf.wrap(node, 'span', { class: 'mathjax-overflow' })
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex/dist/contrib/copy-tex.min.js"></script><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script></div>#efefef<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script></div></body></html>
