@@ -6,7 +6,7 @@
   <link href="http://amadeus-z.github.io/atom.xml" rel="self"/>
   
   <link href="http://amadeus-z.github.io/"/>
-  <updated>2022-12-19T13:08:43.560Z</updated>
+  <updated>2022-12-21T13:21:12.503Z</updated>
   <id>http://amadeus-z.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Chapter_3</title>
+    <link href="http://amadeus-z.github.io/2022/12/21/Chapter-3/"/>
+    <id>http://amadeus-z.github.io/2022/12/21/Chapter-3/</id>
+    <published>2022-12-21T13:20:42.000Z</published>
+    <updated>2022-12-21T13:21:12.503Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Chapter-3-Interpolation"><a href="#Chapter-3-Interpolation" class="headerlink" title="Chapter_3_Interpolation"></a>Chapter_3_Interpolation</h1><h2 id="Interpolating-Functions"><a href="#Interpolating-Functions" class="headerlink" title="Interpolating Functions"></a>Interpolating Functions</h2><h3 id="Lagrange-Interpolation"><a href="#Lagrange-Interpolation" class="headerlink" title="Lagrange Interpolation"></a>Lagrange Interpolation</h3><h4 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h4><p><strong>Example</strong>:Gien three points $(x_{1},y_{1}),(x_{2},y_{2}),(x_{3},y_{3})$<br>Then the Lagrange interpolating polynomial $P(x)=y_{1}\frac{(x-x_{2})(x-x_{3})}{(x_{1}-x_{2})(x_{1}-x_{3})}+y_{2}\frac{(x-x_{1})(x-x_{3})}{(x_{2}-x_{1})(x_{2}-x_{3})}+y_{3}\frac{(x-x_{1})(x-x_{2})}{(x_{3}-x_{1})(x_{3}-x_{2})}$</p><h4 id="Theorem"><a href="#Theorem" class="headerlink" title="Theorem"></a>Theorem</h4><p>Let $(x_{1},y_{1}),\dots,(x_{n},y_{x})$ be $n$ points in the plane with distinct $x_{i}$. Then there exists one and only one polynomial $P$ of degree $n-1$ or less that satisfies $P(x_{i})=y_{i}$ for $i=1,\dots,n$</p><h3 id="Newton’s-Divided-Differences"><a href="#Newton’s-Divided-Differences" class="headerlink" title="Newton’s Divided Differences"></a>Newton’s Divided Differences</h3><h4 id="Definition-1"><a href="#Definition-1" class="headerlink" title="Definition"></a>Definition</h4><p>Given $x=[x_{1},\dots,x_{n}],y=[y_{1},\dots,y_{n}]$<br>For $j=1,\dots,n$<br>    $f[x_{j}]=y_{j}$<br>End</p><p>For $i=2,\dots,n$<br>    For $j=1,\dots,n+1-i$<br>        $f[x_{j} \ \dots \ x_{j+i-1} ]=\frac{f[x_{j+1} \ \dots \ x_{j+i-1} ]-f[x_{j} \ \dots \ x_{j+i-2} ]}{(x_{j+i-1}-x_{j})}$<br>    End<br>End</p><p>Then the Interpolating polynomial is $P(x)=\sum\limits_{i=1}^{n}f<a href="x-x_{1}">x_{1} \ \dots \ x_{i}</a>\cdots(x-x_{i-1})$ </p><h3 id="Interpolation-Error-Formula"><a href="#Interpolation-Error-Formula" class="headerlink" title="Interpolation Error Formula"></a>Interpolation Error Formula</h3><h4 id="Theorem-1"><a href="#Theorem-1" class="headerlink" title="Theorem"></a>Theorem</h4><p>Assume $P(x)$ is the (degree $n-1$ or less) interpolating polynomial fitting the $n$ points $(x_{1},y_{1}),\dots,(x_{n},y_{n})$. The interpolation error is </p><script type="math/tex; mode=display">f(x)-P(x)=\frac{(x-x_{1})(x-x_{2})\cdots(x-x_{n})}{n!}f^{(n)}(c)</script><p>where $c$ lies between the samllest and largest of the numbers $x,x_{1},\dots,x_{n}$</p><h3 id="Runge-Phenomenon"><a href="#Runge-Phenomenon" class="headerlink" title="Runge Phenomenon"></a>Runge Phenomenon</h3><p>The fuction has the same general shape as the triangular bump but the interpolation polynomial wiggle near the ends of the interpolation interval.</p><h2 id="Chebyshev’s-Theorem"><a href="#Chebyshev’s-Theorem" class="headerlink" title="Chebyshev’s Theorem"></a>Chebyshev’s Theorem</h2><p>A particular optimal way of spaceing the base points</p><h3 id="Chebyshev’s-Theorem-1"><a href="#Chebyshev’s-Theorem-1" class="headerlink" title="Chebyshev’s Theorem"></a>Chebyshev’s Theorem</h3><h4 id="Theorem-2"><a href="#Theorem-2" class="headerlink" title="Theorem"></a>Theorem</h4><p>The choice of real numbers $-1\le x_{1},\dots ,x_{n}\le 1$ that makes the value of </p><script type="math/tex; mode=display">\max\limits_{-1\le x\le 1}|(x-x_{1})\cdots(x-x_{n})|</script><p>as small as possible is</p><script type="math/tex; mode=display">x_{i}=\cos{\frac{(2i-1)\pi}{2n}} \ \ \ \text{For} \ i=1,\dots,n</script><p>And the minimum value is $\frac{1}{2^{n-1}}$. In fact the minimum is achieved by</p><script type="math/tex; mode=display">(x-x_{1})\cdots(x-x_{n})=\frac{1}{2^{n-1}}T_{n}(x)</script><p>where $T_{n}(x)$ denotes the degree $n$ Chebyshev polynomial.</p><h4 id="Chebyshev-Polynomials"><a href="#Chebyshev-Polynomials" class="headerlink" title="Chebyshev Polynomials"></a>Chebyshev Polynomials</h4><p>The $n$th Chebyshev Polynomial: $T_{n}(x)=\cos{(n\arccos{x})}$<br>Set $y$ = $\arccos{x}$ $\Rightarrow T_{n+1}(x)+T_{n-1}(x)=2\cos{ny}\cos{y}=2xT_{n}(x)$<br>$\Rightarrow$ the recursion relation: $T_{n+1}(x)=2xT_{n}(x)-T_{n-1}(x)$</p><h4 id="Change-of-Intercal"><a href="#Change-of-Intercal" class="headerlink" title="Change of Intercal"></a>Change of Intercal</h4><p>On the intercal $[a,b]$,</p><script type="math/tex; mode=display">x_{i}=\frac{b+a}{2}+\frac{b-a}{2}\cos{\frac{(2i-1)\pi}{2n}}</script><p>For $i=1,\dots,n$. The inequality</p><script type="math/tex; mode=display">|(x-x_{1})\cdots(x-x_{n})|\le \frac{(\frac{b-a}{2}^{n})}{2^{n-1}}</script><p>holds on $[a,b]$</p><h2 id="Cubic-Splines"><a href="#Cubic-Splines" class="headerlink" title="Cubic Splines"></a>Cubic Splines</h2><p>The idea of splines: using several formulas, each a low-degree polynomial to pass through the data points</p><h3 id="Cubic-spline"><a href="#Cubic-spline" class="headerlink" title="Cubic spline"></a>Cubic spline</h3><h4 id="Definition-2"><a href="#Definition-2" class="headerlink" title="Definition"></a>Definition</h4><p>A cubic spline $S(x)$ through the data points $(x_{1},y_{1}),\dots,(x_{n},y_{n})$ is a set of cubic polynomials:</p><script type="math/tex; mode=display">S_{n-1}(x)=y_{n-1}+b_{n-1}(x-x_{n-1})+c_{n-1}(x-x_{n-1})^{2}+d_{n-1}(x-x_{n-1})^{3} \ \text{on} \ [x_{n-1},x_{n}]</script><h4 id="Property"><a href="#Property" class="headerlink" title="Property"></a>Property</h4><ol><li>$S_{i}(x_{i})=y_{i}$ and $S_{i}(x_{i+1})=y_{i+1}$ for $i=1,\dots,n-1$</li><li>$S_{i-1}’(x_{i})=S_{i}’(x_{i})$ for $i=2,\dots,n-1$</li><li>$S_{i-1}’’(x_{i})=S_{i}’’(x_{i})$ for $i=2,\dots,n-1$</li></ol><p>Above all there are $3(n-1)$ unknowns with $n-1+2(n-2)=3n-5$ linear equations, so there are infinitely many cubic splines. Then we add two more constraints.</p><ol><li>$S_{1}’’(x_{1})=0$ and $S_{n-1}’’(x_{n})=0$  (Natural spline)</li></ol><p>Then we can solve $3(n-1)$ unknowns with $3(n-1)$ linear equations</p><h2 id="Bezier-Curves"><a href="#Bezier-Curves" class="headerlink" title="Bezier Curves"></a>Bezier Curves</h2><p>$to \ be \ continued$</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Chapter-3-Interpolation&quot;&gt;&lt;a href=&quot;#Chapter-3-Interpolation&quot; class=&quot;headerlink&quot; title=&quot;Chapter_3_Interpolation&quot;&gt;&lt;/a&gt;Chapter_3_Interpo</summary>
+      
+    
+    
+    
+    
+    <category term="Numerical" scheme="http://amadeus-z.github.io/tags/Numerical/"/>
+    
+  </entry>
   
   <entry>
     <title>Chapter_2</title>

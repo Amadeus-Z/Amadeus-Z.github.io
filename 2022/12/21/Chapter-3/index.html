@@ -1,0 +1,244 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Chapter_3 | </title><meta name="author" content="Amadeus"><meta name="copyright" content="Amadeus"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Chapter_3_InterpolationInterpolating FunctionsLagrange InterpolationDefinitionExample:Gien three points $(x_{1},y_{1}),(x_{2},y_{2}),(x_{3},y_{3})$Then the Lagrange interpolating polynomial $P(x)&#x3D;y_{1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chapter_3">
+<meta property="og:url" content="http://amadeus-z.github.io/2022/12/21/Chapter-3/index.html">
+<meta property="og:site_name">
+<meta property="og:description" content="Chapter_3_InterpolationInterpolating FunctionsLagrange InterpolationDefinitionExample:Gien three points $(x_{1},y_{1}),(x_{2},y_{2}),(x_{3},y_{3})$Then the Lagrange interpolating polynomial $P(x)&#x3D;y_{1">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://amadeus-z.github.io/img/top.webp">
+<meta property="article:published_time" content="2022-12-21T13:20:42.000Z">
+<meta property="article:modified_time" content="2022-12-21T13:21:12.503Z">
+<meta property="article:author" content="Amadeus">
+<meta property="article:tag" content="Numerical">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://amadeus-z.github.io/img/top.webp"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://amadeus-z.github.io/2022/12/21/Chapter-3/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: ture,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Chapter_3',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-12-21 21:21:12'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/Users/amadeus/Documents/blog/themes/butterfly/source/css/mycss.css"><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (false) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/top.webp')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/"></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Chapter_3</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-12-21T13:20:42.000Z" title="发表于 2022-12-21 21:20:42">2022-12-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-12-21T13:21:12.503Z" title="更新于 2022-12-21 21:21:12">2022-12-21</time></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Chapter-3-Interpolation"><a href="#Chapter-3-Interpolation" class="headerlink" title="Chapter_3_Interpolation"></a>Chapter_3_Interpolation</h1><h2 id="Interpolating-Functions"><a href="#Interpolating-Functions" class="headerlink" title="Interpolating Functions"></a>Interpolating Functions</h2><h3 id="Lagrange-Interpolation"><a href="#Lagrange-Interpolation" class="headerlink" title="Lagrange Interpolation"></a>Lagrange Interpolation</h3><h4 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h4><p><strong>Example</strong>:Gien three points $(x_{1},y_{1}),(x_{2},y_{2}),(x_{3},y_{3})$<br>Then the Lagrange interpolating polynomial $P(x)=y_{1}\frac{(x-x_{2})(x-x_{3})}{(x_{1}-x_{2})(x_{1}-x_{3})}+y_{2}\frac{(x-x_{1})(x-x_{3})}{(x_{2}-x_{1})(x_{2}-x_{3})}+y_{3}\frac{(x-x_{1})(x-x_{2})}{(x_{3}-x_{1})(x_{3}-x_{2})}$</p>
+<h4 id="Theorem"><a href="#Theorem" class="headerlink" title="Theorem"></a>Theorem</h4><p>Let $(x_{1},y_{1}),\dots,(x_{n},y_{x})$ be $n$ points in the plane with distinct $x_{i}$. Then there exists one and only one polynomial $P$ of degree $n-1$ or less that satisfies $P(x_{i})=y_{i}$ for $i=1,\dots,n$</p>
+<h3 id="Newton’s-Divided-Differences"><a href="#Newton’s-Divided-Differences" class="headerlink" title="Newton’s Divided Differences"></a>Newton’s Divided Differences</h3><h4 id="Definition-1"><a href="#Definition-1" class="headerlink" title="Definition"></a>Definition</h4><p>Given $x=[x_{1},\dots,x_{n}],y=[y_{1},\dots,y_{n}]$<br>For $j=1,\dots,n$<br>    $f[x_{j}]=y_{j}$<br>End</p>
+<p>For $i=2,\dots,n$<br>    For $j=1,\dots,n+1-i$<br>        $f[x_{j} \ \dots \ x_{j+i-1} ]=\frac{f[x_{j+1} \ \dots \ x_{j+i-1} ]-f[x_{j} \ \dots \ x_{j+i-2} ]}{(x_{j+i-1}-x_{j})}$<br>    End<br>End</p>
+<p>Then the Interpolating polynomial is $P(x)=\sum\limits_{i=1}^{n}f<a href="x-x_{1}">x_{1} \ \dots \ x_{i}</a>\cdots(x-x_{i-1})$ </p>
+<h3 id="Interpolation-Error-Formula"><a href="#Interpolation-Error-Formula" class="headerlink" title="Interpolation Error Formula"></a>Interpolation Error Formula</h3><h4 id="Theorem-1"><a href="#Theorem-1" class="headerlink" title="Theorem"></a>Theorem</h4><p>Assume $P(x)$ is the (degree $n-1$ or less) interpolating polynomial fitting the $n$ points $(x_{1},y_{1}),\dots,(x_{n},y_{n})$. The interpolation error is </p>
+<script type="math/tex; mode=display">f(x)-P(x)=\frac{(x-x_{1})(x-x_{2})\cdots(x-x_{n})}{n!}f^{(n)}(c)</script><p>where $c$ lies between the samllest and largest of the numbers $x,x_{1},\dots,x_{n}$</p>
+<h3 id="Runge-Phenomenon"><a href="#Runge-Phenomenon" class="headerlink" title="Runge Phenomenon"></a>Runge Phenomenon</h3><p>The fuction has the same general shape as the triangular bump but the interpolation polynomial wiggle near the ends of the interpolation interval.</p>
+<h2 id="Chebyshev’s-Theorem"><a href="#Chebyshev’s-Theorem" class="headerlink" title="Chebyshev’s Theorem"></a>Chebyshev’s Theorem</h2><p>A particular optimal way of spaceing the base points</p>
+<h3 id="Chebyshev’s-Theorem-1"><a href="#Chebyshev’s-Theorem-1" class="headerlink" title="Chebyshev’s Theorem"></a>Chebyshev’s Theorem</h3><h4 id="Theorem-2"><a href="#Theorem-2" class="headerlink" title="Theorem"></a>Theorem</h4><p>The choice of real numbers $-1\le x_{1},\dots ,x_{n}\le 1$ that makes the value of </p>
+<script type="math/tex; mode=display">\max\limits_{-1\le x\le 1}|(x-x_{1})\cdots(x-x_{n})|</script><p>as small as possible is</p>
+<script type="math/tex; mode=display">x_{i}=\cos{\frac{(2i-1)\pi}{2n}} \ \ \ \text{For} \ i=1,\dots,n</script><p>And the minimum value is $\frac{1}{2^{n-1}}$. In fact the minimum is achieved by</p>
+<script type="math/tex; mode=display">(x-x_{1})\cdots(x-x_{n})=\frac{1}{2^{n-1}}T_{n}(x)</script><p>where $T_{n}(x)$ denotes the degree $n$ Chebyshev polynomial.</p>
+<h4 id="Chebyshev-Polynomials"><a href="#Chebyshev-Polynomials" class="headerlink" title="Chebyshev Polynomials"></a>Chebyshev Polynomials</h4><p>The $n$th Chebyshev Polynomial: $T_{n}(x)=\cos{(n\arccos{x})}$<br>Set $y$ = $\arccos{x}$ $\Rightarrow T_{n+1}(x)+T_{n-1}(x)=2\cos{ny}\cos{y}=2xT_{n}(x)$<br>$\Rightarrow$ the recursion relation: $T_{n+1}(x)=2xT_{n}(x)-T_{n-1}(x)$</p>
+<h4 id="Change-of-Intercal"><a href="#Change-of-Intercal" class="headerlink" title="Change of Intercal"></a>Change of Intercal</h4><p>On the intercal $[a,b]$,</p>
+<script type="math/tex; mode=display">x_{i}=\frac{b+a}{2}+\frac{b-a}{2}\cos{\frac{(2i-1)\pi}{2n}}</script><p>For $i=1,\dots,n$. The inequality</p>
+<script type="math/tex; mode=display">|(x-x_{1})\cdots(x-x_{n})|\le \frac{(\frac{b-a}{2}^{n})}{2^{n-1}}</script><p>holds on $[a,b]$</p>
+<h2 id="Cubic-Splines"><a href="#Cubic-Splines" class="headerlink" title="Cubic Splines"></a>Cubic Splines</h2><p>The idea of splines: using several formulas, each a low-degree polynomial to pass through the data points</p>
+<h3 id="Cubic-spline"><a href="#Cubic-spline" class="headerlink" title="Cubic spline"></a>Cubic spline</h3><h4 id="Definition-2"><a href="#Definition-2" class="headerlink" title="Definition"></a>Definition</h4><p>A cubic spline $S(x)$ through the data points $(x_{1},y_{1}),\dots,(x_{n},y_{n})$ is a set of cubic polynomials:</p>
+<script type="math/tex; mode=display">S_{n-1}(x)=y_{n-1}+b_{n-1}(x-x_{n-1})+c_{n-1}(x-x_{n-1})^{2}+d_{n-1}(x-x_{n-1})^{3} \ \text{on} \ [x_{n-1},x_{n}]</script><h4 id="Property"><a href="#Property" class="headerlink" title="Property"></a>Property</h4><ol>
+<li>$S_{i}(x_{i})=y_{i}$ and $S_{i}(x_{i+1})=y_{i+1}$ for $i=1,\dots,n-1$</li>
+<li>$S_{i-1}’(x_{i})=S_{i}’(x_{i})$ for $i=2,\dots,n-1$</li>
+<li>$S_{i-1}’’(x_{i})=S_{i}’’(x_{i})$ for $i=2,\dots,n-1$</li>
+</ol>
+<p>Above all there are $3(n-1)$ unknowns with $n-1+2(n-2)=3n-5$ linear equations, so there are infinitely many cubic splines. Then we add two more constraints.</p>
+<ol>
+<li>$S_{1}’’(x_{1})=0$ and $S_{n-1}’’(x_{n})=0$  (Natural spline)</li>
+</ol>
+<p>Then we can solve $3(n-1)$ unknowns with $3(n-1)$ linear equations</p>
+<h2 id="Bezier-Curves"><a href="#Bezier-Curves" class="headerlink" title="Bezier Curves"></a>Bezier Curves</h2><p>$to \ be \ continued$</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Numerical/">Numerical</a></div><div class="post_share"><div class="social-share" data-image="/img/top.webp" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/12/19/Chapter-2/"><img class="next-cover" src="/img/top.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Chapter_2</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/12/13/Chapter-0/" title="Chapter_0"><img class="cover" src="/img/top.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-13</div><div class="title">Chapter_0</div></div></a></div><div><a href="/2022/12/16/Chapter-1/" title="Chapter_1"><img class="cover" src="/img/top.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-16</div><div class="title">Chapter_1</div></div></a></div><div><a href="/2022/12/19/Chapter-2/" title="Chapter_2"><img class="cover" src="/img/top.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-19</div><div class="title">Chapter_2</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Amadeus</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Amadeus-Z"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:qiuyizhao4-c@my.cityu.edu.hk" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Chapter-3-Interpolation"><span class="toc-number">1.</span> <span class="toc-text">Chapter_3_Interpolation</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Interpolating-Functions"><span class="toc-number">1.1.</span> <span class="toc-text">Interpolating Functions</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Lagrange-Interpolation"><span class="toc-number">1.1.1.</span> <span class="toc-text">Lagrange Interpolation</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Definition"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">Definition</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Theorem"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">Theorem</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Newton%E2%80%99s-Divided-Differences"><span class="toc-number">1.1.2.</span> <span class="toc-text">Newton’s Divided Differences</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Definition-1"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">Definition</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Interpolation-Error-Formula"><span class="toc-number">1.1.3.</span> <span class="toc-text">Interpolation Error Formula</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Theorem-1"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">Theorem</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Runge-Phenomenon"><span class="toc-number">1.1.4.</span> <span class="toc-text">Runge Phenomenon</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Chebyshev%E2%80%99s-Theorem"><span class="toc-number">1.2.</span> <span class="toc-text">Chebyshev’s Theorem</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Chebyshev%E2%80%99s-Theorem-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">Chebyshev’s Theorem</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Theorem-2"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">Theorem</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Chebyshev-Polynomials"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">Chebyshev Polynomials</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Change-of-Intercal"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">Change of Intercal</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cubic-Splines"><span class="toc-number">1.3.</span> <span class="toc-text">Cubic Splines</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Cubic-spline"><span class="toc-number">1.3.1.</span> <span class="toc-text">Cubic spline</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Definition-2"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">Definition</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Property"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">Property</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bezier-Curves"><span class="toc-number">1.4.</span> <span class="toc-text">Bezier Curves</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/12/21/Chapter-3/" title="Chapter_3"><img src="/img/top.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Chapter_3"/></a><div class="content"><a class="title" href="/2022/12/21/Chapter-3/" title="Chapter_3">Chapter_3</a><time datetime="2022-12-21T13:20:42.000Z" title="发表于 2022-12-21 21:20:42">2022-12-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/19/Chapter-2/" title="Chapter_2"><img src="/img/top.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Chapter_2"/></a><div class="content"><a class="title" href="/2022/12/19/Chapter-2/" title="Chapter_2">Chapter_2</a><time datetime="2022-12-19T13:07:36.000Z" title="发表于 2022-12-19 21:07:36">2022-12-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/16/Chapter-1/" title="Chapter_1"><img src="/img/top.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Chapter_1"/></a><div class="content"><a class="title" href="/2022/12/16/Chapter-1/" title="Chapter_1">Chapter_1</a><time datetime="2022-12-16T13:45:45.000Z" title="发表于 2022-12-16 21:45:45">2022-12-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/13/Chapter-0/" title="Chapter_0"><img src="/img/top.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Chapter_0"/></a><div class="content"><a class="title" href="/2022/12/13/Chapter-0/" title="Chapter_0">Chapter_0</a><time datetime="2022-12-13T11:54:28.000Z" title="发表于 2022-12-13 19:54:28">2022-12-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/11/02/Anything/" title="Anything"><img src="/img/top.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Anything"/></a><div class="content"><a class="title" href="/2022/11/02/Anything/" title="Anything">Anything</a><time datetime="2022-11-02T08:08:13.000Z" title="发表于 2022-11-02 16:08:13">2022-11-02</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/top.webp')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Amadeus</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container').forEach(node => {
+            if (node.hasAttribute('display')) {
+              btf.wrap(node, 'div', { class: 'mathjax-overflow' })
+            } else {
+              btf.wrap(node, 'span', { class: 'mathjax-overflow' })
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex/dist/contrib/copy-tex.min.js"></script><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script></div>#efefef<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script></div></body></html>
