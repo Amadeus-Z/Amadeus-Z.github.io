@@ -1,0 +1,257 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Chapter_6 | </title><meta name="author" content="Amadeus"><meta name="copyright" content="Amadeus"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Initial Value ProblemsEuler’s Methodinitial value problem$y’&#x3D;f(t,y),y(a)&#x3D;y_{0},t\in [a,b]$ , $f$ represents the slope of the solution. Definitiondivide the interval to $n+1$ points: $t_{0},\dots,t_{n}">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chapter_6">
+<meta property="og:url" content="http://amadeus-z.github.io/2022/12/28/Chapter-6/index.html">
+<meta property="og:site_name">
+<meta property="og:description" content="Initial Value ProblemsEuler’s Methodinitial value problem$y’&#x3D;f(t,y),y(a)&#x3D;y_{0},t\in [a,b]$ , $f$ represents the slope of the solution. Definitiondivide the interval to $n+1$ points: $t_{0},\dots,t_{n}">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://amadeus-z.github.io/img/top.webp">
+<meta property="article:published_time" content="2022-12-28T07:52:45.000Z">
+<meta property="article:modified_time" content="2022-12-28T07:53:58.382Z">
+<meta property="article:author" content="Amadeus">
+<meta property="article:tag" content="Numerical">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://amadeus-z.github.io/img/top.webp"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://amadeus-z.github.io/2022/12/28/Chapter-6/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: ture,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Chapter_6',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-12-28 15:53:58'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/Users/amadeus/Documents/blog/themes/butterfly/source/css/mycss.css"><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (false) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/top.webp')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/"></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Chapter_6</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-12-28T07:52:45.000Z" title="发表于 2022-12-28 15:52:45">2022-12-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-12-28T07:53:58.382Z" title="更新于 2022-12-28 15:53:58">2022-12-28</time></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="Initial-Value-Problems"><a href="#Initial-Value-Problems" class="headerlink" title="Initial Value Problems"></a>Initial Value Problems</h2><h3 id="Euler’s-Method"><a href="#Euler’s-Method" class="headerlink" title="Euler’s Method"></a>Euler’s Method</h3><h4 id="initial-value-problem"><a href="#initial-value-problem" class="headerlink" title="initial value problem"></a>initial value problem</h4><p>$y’=f(t,y),y(a)=y_{0},t\in [a,b]$ , $f$ represents the slope of the solution.</p>
+<h4 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h4><p>divide the interval to $n+1$ points: $t_{0},\dots,t_{n}$ , $h$ is the step size.<br>$w_{0}=y_{0}$<br>$w_{i+1}=w_{i}+hf(t_{i},w_{i})$ </p>
+<h4 id="Existence-of-solutions"><a href="#Existence-of-solutions" class="headerlink" title="Existence of solutions"></a>Existence of solutions</h4><p>Assume that $f(t,y)$ is Lipschitz continuous in the variable $y$ on the set $[a,b]\times [\alpha,\beta]$ and $\alpha &lt; y_{a} &lt;\beta$. Then there exists $c$ between $a$ and $b$ such that the initial value problem has exactly one solution $y(t)$. Moreover, if $f$ is Lipschitz on $[a,b]\times (-\infty,\infty)$, then there exists exactly one solution on $[a,b]$.</p>
+<p><strong>(Banach Fixed Point Theorem For ODE)</strong></p>
+<h4 id="Stability-Error-Amplification"><a href="#Stability-Error-Amplification" class="headerlink" title="Stability (Error Amplification)"></a>Stability (Error Amplification)</h4><p>Assume that $f(t,y)$ is Lipschitz in the variable $y$ on the set $S=[a,b]\times [\alpha,\beta]$.<br>If $Y(t)$ and $Z(t)$ are solutions in $S$ of the differential equation $y’=f(t,y)$ with initial conditions $Y(a)$ and $Z(a)$ respectively, then</p>
+<script type="math/tex; mode=display">|Y(t)-Z(t)|\le e^{L(t-a)}|Y(a)-Z(a)|</script><p>$L$ called the <strong>Lipschitz constant</strong></p>
+<h4 id="First-order-linear-equations"><a href="#First-order-linear-equations" class="headerlink" title="First-order linear equations"></a>First-order linear equations</h4><p>The IVP who are linear in the $y$ variable<br>$y’=g(t)y+h(t)\Rightarrow (y’-g(t)y)e^{-\int g(t)dt}=e^{-\int g(t)dt} h(t)\Rightarrow y(t)=e^{\int g(t)dt}\int e^{-\int g(t)dt}h(t)dt$<br>using $L=\max_{[a,b]}g(t)$ as the Lipschitz constant to prove the unique solution </p>
+<h2 id="Analysis-of-IVP-solvers"><a href="#Analysis-of-IVP-solvers" class="headerlink" title="Analysis of IVP solvers"></a>Analysis of IVP solvers</h2><h3 id="Global-and-Local-truncation-error"><a href="#Global-and-Local-truncation-error" class="headerlink" title="Global and Local truncation error"></a>Global and Local truncation error</h3><h4 id="Definition-1"><a href="#Definition-1" class="headerlink" title="Definition"></a>Definition</h4><p><strong>global truncation error</strong> $g_{i}=|w_{i}-y_{i}|$ : the difference between approximation and the correct solution.<br><strong>Local truncation error</strong> $e_{i+1}=|w_{i+1}-z(t_{i+1})|$ : the difference between value of the solver on that interval and the correct solution of the “one-step IVP”：$y’=f(t,y);y(t_{i})=w_{i};t\in[t_{i},t_{i+1}]$ </p>
+<h4 id="Theorem"><a href="#Theorem" class="headerlink" title="Theorem"></a>Theorem</h4><p>Assume that $f(t,y)$ has a Lipschitz constant $L$ for the variable $y$ and that the value $y_{i}$ of the solution of the IVP at $t_{i}$ is approximated by $w_{i}$ from a one-step ODE solver with local truncation error $e_{i}\le Ch^{k+1}$ , for some constant $C$ and $k\ge 0$ .<br>Then for each $a&lt;t_{i}&lt;b$, the solver has global truncation error:</p>
+<script type="math/tex; mode=display">g_{i}=|w_{i}-y_{i}|\le \frac{Ch^{k}}{L}(e^{L(t_{i}-a)}-1)</script><h4 id="Euler’s-Method-Convergence"><a href="#Euler’s-Method-Convergence" class="headerlink" title="Euler’s Method Convergence"></a>Euler’s Method Convergence</h4><p>Assume that $f(t,y)$ has a Lipschitz constant $L$ for the variable $y$ and that the solution $y_{i}$ of the IVP at $t_{i}$ is approximated by $w_{i}$, using Euler’s Method, Let $M$ be an upper bound for $|y’’(t)|$ on $[a,b]$, Then</p>
+<script type="math/tex; mode=display">|w_{i}-y_{i}|\le \frac{Mh}{2L}(e^{L(t_{i}-a)}-1)</script><h3 id="The-Explicit-Trapezoid-Method"><a href="#The-Explicit-Trapezoid-Method" class="headerlink" title="The Explicit Trapezoid Method"></a>The Explicit Trapezoid Method</h3><p>A small adjustment in Euler’s Method to make an improvement in accuracy</p>
+<h4 id="Definition-2"><a href="#Definition-2" class="headerlink" title="Definition"></a>Definition</h4><p>$w_{0}=y+0$<br>$w_{i+1}=w_{i}+ \frac{h}{2}(f(t_{i},w_{i})+f(t_{i}+h,w_{i}+hf(t_{i},w_{i})))$</p>
+<h3 id="Taylor-Methods"><a href="#Taylor-Methods" class="headerlink" title="Taylor Methods"></a>Taylor Methods</h3><p>For each positive integer $k$, there is a Taylor Method of order $k$.</p>
+<h4 id="Definition-3"><a href="#Definition-3" class="headerlink" title="Definition"></a>Definition</h4><p>$w_{0}=y_{0}$<br>$w_{i+1}=w_{i}+hf(t_{i},w_{i})+\frac{h^{2}}{2}f’(t_{i},w_{i})+\cdots+ \frac{h^{k}}{k!}f^{(k-1)}(t_{i},w_{i})$<br>The prime notation refers to the total derivative of $f(t,y(t))$ with respect to $t$.</p>
+<h2 id="Systems-of-Ordinary-Differential-Equations"><a href="#Systems-of-Ordinary-Differential-Equations" class="headerlink" title="Systems of Ordinary Differential Equations"></a>Systems of Ordinary Differential Equations</h2><h3 id="Higher-order-equations"><a href="#Higher-order-equations" class="headerlink" title="Higher order equations"></a>Higher order equations</h3><p>Let $y^{(n)}=f(t,y,y’,\dots,y^{(n-1)})$ , define new variables $y_{i}=y^{(i-1)}$ , then $y^{(n)}= y_{n}’=f(t,y_{1},y_{2},\dots,y_{n})$ </p>
+<h3 id="The-Pendulum"><a href="#The-Pendulum" class="headerlink" title="The Pendulum"></a>The Pendulum</h3><p>The differential equation governing the frictionless pendulum is:</p>
+<script type="math/tex; mode=display">mly''=F=-mg\sin y</script><p>Setting $y_{1}=y,y_{2}=y’$, then the second-order equation is converted to a first-order system:<br>$y_{1}’=y_{2}$<br>$y_{2}’=- \frac{g}{l}\sin y_{1}$</p>
+<h3 id="Orbital-mechanics"><a href="#Orbital-mechanics" class="headerlink" title="Orbital mechanics"></a>Orbital mechanics</h3><p>The motion of an orbiting satellite.<br>Place the large mass at the origin, denote the position of the satellite by $(x,y)$. A force on the satellite is in the direction of the large mass, the unit vector:</p>
+<script type="math/tex; mode=display">(-\frac{x}{\sqrt{x^{2}+y^{2}}},-\frac{y}{\sqrt{x^{2}+y^{2}}})</script><script type="math/tex; mode=display">(F_{x},F_{y})=(\frac{gm_{1}m_{2}}{x^{2}+y^{2}}\frac{-x}{\sqrt{x^{2}+y^{2}}},\frac{gm_{1}m_{2}}{x^{2}+y^{2}}\frac{-y}{\sqrt{x^{2}+y^{2}}})</script><p>$\Rightarrow \ m_{1}x’’=-\frac{gm_{1}m_{2}x}{(x^{2}+y^{2})^{\frac{3}{2}}}, \ m_{1}y’’=-\frac{gm_{1}m_{2}y}{(x^{2}+y^{2})^{\frac{3}{2}}}$ , introducing the variables $v_{x}=x’$ and $v_{y}=y’$ allows the two second-order equations to be reduced to a system of four-order equations:<br>$x’=v_{x},v_{x}’=-\frac{gm_{2}x}{(x^{2}+y^{2})^{3/2}}$<br>$y’=v_{y},v_{y}’=-\frac{gm_{2}y}{(x^{2}+y^{2})^{3/2}}$</p>
+<h2 id="Runge-Kutta-Methods-and-Applications"><a href="#Runge-Kutta-Methods-and-Applications" class="headerlink" title="Runge-Kutta Methods and Applications"></a>Runge-Kutta Methods and Applications</h2><h3 id="The-Runge-Kutta-Family"><a href="#The-Runge-Kutta-Family" class="headerlink" title="The Runge-Kutta Family"></a>The Runge-Kutta Family</h3><p>The Runge-Kutta Methods are a family of ODE solvers that include the Euler and Trapezoid Methods and more sophisticated methods of higher order.</p>
+<h4 id="Midpoint-Method"><a href="#Midpoint-Method" class="headerlink" title="Midpoint Method"></a>Midpoint Method</h4><p>second-order methods of R-K type.<br>$w_{0}=y_{0}$<br>$w_{i+1}=w_{i}+hf(t_{i}+ \frac{h}{2},w_{i}+ \frac{h}{2}f(t_{i},w_{i}))$</p>
+<h4 id="Runge-Kutta-Method-of-order-4-RK4"><a href="#Runge-Kutta-Method-of-order-4-RK4" class="headerlink" title="Runge-Kutta Method of order 4 (RK4)"></a>Runge-Kutta Method of order 4 (RK4)</h4><script type="math/tex; mode=display">w_{i+1}=w_{i}+ \frac{h}{6}(s_{1}+2s_{2}+2s_{3}+s_{4})</script><p>where</p>
+<ol>
+<li>$s_{1}=f(t_{i},w_{i})$</li>
+<li>$s_{2}=f(t_{i}+ \frac{h}{2},w_{i}+ \frac{h}{2}s_{1})$</li>
+<li>$s_{3}=f(t_{i}+ \frac{h}{2},w_{i}+ \frac{h}{2}s_{2})$</li>
+<li>$s_{4}=f(t_{i}+h,w_{i}+hs_{3})$</li>
+</ol>
+<h2 id="Variable-Step-Size-Methods"><a href="#Variable-Step-Size-Methods" class="headerlink" title="Variable Step-Size Methods"></a>Variable Step-Size Methods</h2><p>To track the slow change and fast change, the step size $h$ can be variable. The key idea is to monitor the error produced by the current step.</p>
+<ol>
+<li>set an error tolerance that must be met by the current step.</li>
+<li>cut the step size if the error tolerance is exceeded</li>
+<li>accept the step and choose a size for the next step if meet the tolerance</li>
+</ol>
+<h3 id="Embedded-Runge-Kutta-pairs"><a href="#Embedded-Runge-Kutta-pairs" class="headerlink" title="Embedded Runge-Kutta pairs"></a>Embedded Runge-Kutta pairs</h3><p>$to \ be \ continued$</p>
+<h3 id="Order-4-5-methods"><a href="#Order-4-5-methods" class="headerlink" title="Order 4/5 methods"></a>Order 4/5 methods</h3><p>$to \ be \ continued$</p>
+<h2 id="Implicit-Methods-and-Stiff-Equations"><a href="#Implicit-Methods-and-Stiff-Equations" class="headerlink" title="Implicit Methods and Stiff Equations"></a>Implicit Methods and Stiff Equations</h2><p>The method doesn’t directly give a formula for the new approximation $w_{i+1}$.</p>
+<h3 id="Backward-Euler-Method"><a href="#Backward-Euler-Method" class="headerlink" title="Backward Euler Method"></a>Backward Euler Method</h3><p>$w_{0}=y_{0}$<br>$w_{i+1}=w_{i}+hf(t_{i+1},w_{i+1})$</p>
+<h2 id="Multistep-Methods"><a href="#Multistep-Methods" class="headerlink" title="Multistep Methods"></a>Multistep Methods</h2><p>Using the knowledge of more than one of the previous $w_{i}$ to help produce the next step. This leads to ODE solvers have order as high as the one-step methods, but much of the necessary computation will be replaced.</p>
+<h3 id="Adams-Bashforth-Two-Step-Method"><a href="#Adams-Bashforth-Two-Step-Method" class="headerlink" title="Adams-Bashforth Two-Step Method"></a>Adams-Bashforth Two-Step Method</h3><p>$w_{i+1}=w_{i}+h[ \frac{3}{2}f(t_{i},w_{i})- \frac{1}{2}f(t_{i-1},w_{i-1})]$</p>
+<h3 id="Implicit-multistep-methods"><a href="#Implicit-multistep-methods" class="headerlink" title="Implicit multistep methods"></a>Implicit multistep methods</h3><h4 id="Implicit-Trapezoid-Method-Second-Order"><a href="#Implicit-Trapezoid-Method-Second-Order" class="headerlink" title="Implicit Trapezoid Method (Second Order)"></a>Implicit Trapezoid Method (Second Order)</h4><p>$w_{i+1}=w_{i}+ \frac{h}{2}[f_{i+1}+f_{i}]$</p>
+<h4 id="Adams-Moulton-Two-Step-Method-third-order"><a href="#Adams-Moulton-Two-Step-Method-third-order" class="headerlink" title="Adams-Moulton Two-Step Method (third order)"></a>Adams-Moulton Two-Step Method (third order)</h4><p>$w_{i+1}=w_{i}+ \frac{h}{12}[5f_{i+1}+8f_{i}-f_{i-1}]$</p>
+<h4 id="Milne-Slimpson-Method"><a href="#Milne-Slimpson-Method" class="headerlink" title="Milne-Slimpson Method"></a>Milne-Slimpson Method</h4><p>$w_{i+1}=w_{i-1}+ \frac{h}{3}[f_{i+1}+4f_{i}+f_{i-1}]$</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Numerical/">Numerical</a></div><div class="post_share"><div class="social-share" data-image="/img/top.webp" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/12/23/Chapter-5/"><img class="next-cover" src="/img/top.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Chapter_5</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/12/13/Chapter-0/" title="Chapter_0"><img class="cover" src="/img/top.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-13</div><div class="title">Chapter_0</div></div></a></div><div><a href="/2022/12/16/Chapter-1/" title="Chapter_1"><img class="cover" src="/img/top.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-16</div><div class="title">Chapter_1</div></div></a></div><div><a href="/2022/12/19/Chapter-2/" title="Chapter_2"><img class="cover" src="/img/top.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-19</div><div class="title">Chapter_2</div></div></a></div><div><a href="/2022/12/21/Chapter-3/" title="Chapter_3"><img class="cover" src="/img/top.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-21</div><div class="title">Chapter_3</div></div></a></div><div><a href="/2022/12/23/Chapter-5/" title="Chapter_5"><img class="cover" src="/img/top.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-23</div><div class="title">Chapter_5</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Amadeus</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Amadeus-Z"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:qiuyizhao4-c@my.cityu.edu.hk" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Initial-Value-Problems"><span class="toc-number">1.</span> <span class="toc-text">Initial Value Problems</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Euler%E2%80%99s-Method"><span class="toc-number">1.1.</span> <span class="toc-text">Euler’s Method</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#initial-value-problem"><span class="toc-number">1.1.1.</span> <span class="toc-text">initial value problem</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Definition"><span class="toc-number">1.1.2.</span> <span class="toc-text">Definition</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Existence-of-solutions"><span class="toc-number">1.1.3.</span> <span class="toc-text">Existence of solutions</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Stability-Error-Amplification"><span class="toc-number">1.1.4.</span> <span class="toc-text">Stability (Error Amplification)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#First-order-linear-equations"><span class="toc-number">1.1.5.</span> <span class="toc-text">First-order linear equations</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Analysis-of-IVP-solvers"><span class="toc-number">2.</span> <span class="toc-text">Analysis of IVP solvers</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Global-and-Local-truncation-error"><span class="toc-number">2.1.</span> <span class="toc-text">Global and Local truncation error</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Definition-1"><span class="toc-number">2.1.1.</span> <span class="toc-text">Definition</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Theorem"><span class="toc-number">2.1.2.</span> <span class="toc-text">Theorem</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Euler%E2%80%99s-Method-Convergence"><span class="toc-number">2.1.3.</span> <span class="toc-text">Euler’s Method Convergence</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#The-Explicit-Trapezoid-Method"><span class="toc-number">2.2.</span> <span class="toc-text">The Explicit Trapezoid Method</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Definition-2"><span class="toc-number">2.2.1.</span> <span class="toc-text">Definition</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Taylor-Methods"><span class="toc-number">2.3.</span> <span class="toc-text">Taylor Methods</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Definition-3"><span class="toc-number">2.3.1.</span> <span class="toc-text">Definition</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Systems-of-Ordinary-Differential-Equations"><span class="toc-number">3.</span> <span class="toc-text">Systems of Ordinary Differential Equations</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Higher-order-equations"><span class="toc-number">3.1.</span> <span class="toc-text">Higher order equations</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#The-Pendulum"><span class="toc-number">3.2.</span> <span class="toc-text">The Pendulum</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Orbital-mechanics"><span class="toc-number">3.3.</span> <span class="toc-text">Orbital mechanics</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Runge-Kutta-Methods-and-Applications"><span class="toc-number">4.</span> <span class="toc-text">Runge-Kutta Methods and Applications</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#The-Runge-Kutta-Family"><span class="toc-number">4.1.</span> <span class="toc-text">The Runge-Kutta Family</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Midpoint-Method"><span class="toc-number">4.1.1.</span> <span class="toc-text">Midpoint Method</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Runge-Kutta-Method-of-order-4-RK4"><span class="toc-number">4.1.2.</span> <span class="toc-text">Runge-Kutta Method of order 4 (RK4)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Variable-Step-Size-Methods"><span class="toc-number">5.</span> <span class="toc-text">Variable Step-Size Methods</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Embedded-Runge-Kutta-pairs"><span class="toc-number">5.1.</span> <span class="toc-text">Embedded Runge-Kutta pairs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Order-4-5-methods"><span class="toc-number">5.2.</span> <span class="toc-text">Order 4&#x2F;5 methods</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Implicit-Methods-and-Stiff-Equations"><span class="toc-number">6.</span> <span class="toc-text">Implicit Methods and Stiff Equations</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Backward-Euler-Method"><span class="toc-number">6.1.</span> <span class="toc-text">Backward Euler Method</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Multistep-Methods"><span class="toc-number">7.</span> <span class="toc-text">Multistep Methods</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Adams-Bashforth-Two-Step-Method"><span class="toc-number">7.1.</span> <span class="toc-text">Adams-Bashforth Two-Step Method</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Implicit-multistep-methods"><span class="toc-number">7.2.</span> <span class="toc-text">Implicit multistep methods</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Implicit-Trapezoid-Method-Second-Order"><span class="toc-number">7.2.1.</span> <span class="toc-text">Implicit Trapezoid Method (Second Order)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Adams-Moulton-Two-Step-Method-third-order"><span class="toc-number">7.2.2.</span> <span class="toc-text">Adams-Moulton Two-Step Method (third order)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Milne-Slimpson-Method"><span class="toc-number">7.2.3.</span> <span class="toc-text">Milne-Slimpson Method</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/12/28/Chapter-6/" title="Chapter_6"><img src="/img/top.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Chapter_6"/></a><div class="content"><a class="title" href="/2022/12/28/Chapter-6/" title="Chapter_6">Chapter_6</a><time datetime="2022-12-28T07:52:45.000Z" title="发表于 2022-12-28 15:52:45">2022-12-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/23/Chapter-5/" title="Chapter_5"><img src="/img/top.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Chapter_5"/></a><div class="content"><a class="title" href="/2022/12/23/Chapter-5/" title="Chapter_5">Chapter_5</a><time datetime="2022-12-23T13:25:33.000Z" title="发表于 2022-12-23 21:25:33">2022-12-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/21/Chapter-3/" title="Chapter_3"><img src="/img/top.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Chapter_3"/></a><div class="content"><a class="title" href="/2022/12/21/Chapter-3/" title="Chapter_3">Chapter_3</a><time datetime="2022-12-21T13:20:42.000Z" title="发表于 2022-12-21 21:20:42">2022-12-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/19/Chapter-2/" title="Chapter_2"><img src="/img/top.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Chapter_2"/></a><div class="content"><a class="title" href="/2022/12/19/Chapter-2/" title="Chapter_2">Chapter_2</a><time datetime="2022-12-19T13:07:36.000Z" title="发表于 2022-12-19 21:07:36">2022-12-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/16/Chapter-1/" title="Chapter_1"><img src="/img/top.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Chapter_1"/></a><div class="content"><a class="title" href="/2022/12/16/Chapter-1/" title="Chapter_1">Chapter_1</a><time datetime="2022-12-16T13:45:45.000Z" title="发表于 2022-12-16 21:45:45">2022-12-16</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/top.webp')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Amadeus</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container').forEach(node => {
+            if (node.hasAttribute('display')) {
+              btf.wrap(node, 'div', { class: 'mathjax-overflow' })
+            } else {
+              btf.wrap(node, 'span', { class: 'mathjax-overflow' })
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex/dist/contrib/copy-tex.min.js"></script><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script></div>#efefef<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script></div></body></html>
