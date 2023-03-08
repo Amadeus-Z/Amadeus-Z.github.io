@@ -1,3 +1,4 @@
+http://amadeus-z.github.io/2023/03/08/PDE/
 http://amadeus-z.github.io/2022/12/19/Chapter-2/
 http://amadeus-z.github.io/2022/12/21/Chapter-3/
 http://amadeus-z.github.io/2022/12/23/Chapter-5/
@@ -9,3 +10,4 @@ http://amadeus-z.github.io/tags/index.html
 http://amadeus-z.github.io/2022/11/02/Anything/
 http://amadeus-z.github.io/
 http://amadeus-z.github.io/tags/Numerical/
+http://amadeus-z.github.io/tags/PDE/
